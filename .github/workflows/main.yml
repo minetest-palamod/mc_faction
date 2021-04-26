@@ -1,0 +1,37 @@
+name: luacheck
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+  workflow_dispatch:
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+      - name: luacheck
+        uses: nebularg/actions-luacheck@v1.1.0
+        #with:
+          #files: # optional, default is .
+          #path: # optional, default is ${{ github.workspace }}
+          #args: # optional
+          #config: # optional
+          #annotate: # optional, default is none
+      - name: translation
+        run: |
+          echo "::group::French"
+          python3 ${GITHUB_WORKSPACE}/tools/update_translation.py fr
+          echo "::endgroup::"
+          echo "::group::Deutch"
+          python3 ${GITHUB_WORKSPACE}/tools/update_translation.py de
+          echo "::endgroup::"
+          echo "::group::Spanish"
+          python3 ${GITHUB_WORKSPACE}/tools/update_translation.py es
+          echo "::endgroup::"
+          echo "::group::Rusian"
+          python3 ${GITHUB_WORKSPACE}/tools/update_translation.py ru
+          echo "::endgroup::"
