@@ -7,11 +7,17 @@ function mc_faction_api.getFactions()
 
 	local factions = {}
 
-	for faction_obj in pairs(mc_faction.DATA) do
+	for faction_obj in pairs(DATA) do
 		local faction_name = faction_obj[count][name]
 		table.insert(factions, faction_name)
 		count = count + 1
 	end
 
 	return factions
+end
+
+function mc_faction_api.getFactionMembers(faction)
+	local conf = parser.Parse(faction .. ".fact")
+
+	return conf["members"]
 end
