@@ -36,7 +36,7 @@ end
 
 function parser.Parse(faction_file)
 	local lines = parser.readLines(faction_file)
-	local DATA
+	local DATA = {}
 
 	for line in pairs(lines) do
 		local key = parser.getKey(line)
