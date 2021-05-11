@@ -28,9 +28,18 @@ end
 
 sql_exec([[
 CREATE TABLE IF NOT EXISTS claims (
-	id INTEGER PRIMARY KEY AUTOINCREMENT,
 	hash INTEGER,
     faction TEXT,
 	creator TEXT,
 );
 ]])
+
+--Only this file should have access to database
+
+function mc_faction.claim.claim(hash, faction, playername)
+end
+function mc_faction.claim.unclaim(hash)
+end
+function mc_faction.claim.get_claim(hash)
+    return sql_row("SELECT faction, creator FROM claims WHERE hash = "..hash)
+end
