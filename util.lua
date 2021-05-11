@@ -25,7 +25,7 @@ function util.getIndexOfArray(array, index)
 end
 
 function util.findIndexOfArray(array, data)
-	i = 0
+	local i = 0
 
 	for item in pairs(array) do
 		if data == item then
@@ -34,6 +34,7 @@ function util.findIndexOfArray(array, data)
 
 		i = i + 1
 	end
+	return i
 end
 
 --TODO:
