@@ -37,9 +37,18 @@ CREATE TABLE IF NOT EXISTS claims (
 --Only this file should have access to database
 
 function mc_faction.claim.claim(hash, faction, playername)
+    sql_exec(
+        ("INSERT INTO claims VALUES (%i, %s, %s);")
+        :format(hash, faction, playername)
+    )
 end
+
 function mc_faction.claim.unclaim(hash)
+    sql_exec(
+        ("DELETE FROM claims WHERE hash = %i LIMIT 1;"):format(hash)
+    )
 end
+
 function mc_faction.claim.get_claim(hash)
     return sql_row("SELECT faction, creator FROM claims WHERE hash = "..hash)
 end
