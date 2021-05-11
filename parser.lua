@@ -36,17 +36,16 @@ end
 
 function parser.Parse(faction_file)
 	local lines = parser.readLines(faction_file)
-	local DATA = {}
 
 	for line in pairs(lines) do
 		local key = parser.getKey(line)
 		local value = parser.getValue(line)
 
 		if parser.getType(value) == "s" then
-			DATA[key] = value
+			mc_faction.DATA[key] = value
 		elseif parser.getType(value) == "a" then
 			local array = parser.stringToArray(value)
-			DATA[key] = array
+			mc_faction.DATA[key] = array
 		end
 	end
 
