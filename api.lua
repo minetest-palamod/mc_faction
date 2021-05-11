@@ -21,3 +21,15 @@ function mc_faction_api.getFactionMembers(faction)
 
 	return conf["members"]
 end
+
+function mc_faction_api.isInFaction(member, faction)
+	local conf = parser.Parse(faction .. ".fact")
+
+	for m in pairs(conf["members"]) do
+		if member == m then
+			return true
+		end
+	end
+
+	return false
+end
