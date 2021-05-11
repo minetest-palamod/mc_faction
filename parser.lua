@@ -18,7 +18,7 @@ end
 function parser.stringToArray(data)
 	local array = {}
 
-	for item in string.gmatch(data, "[^;]+") do
+	for item in string.gmatch(data, "[^" .. parser.seperator .. "]+") do
 		table.insert(array, item)
 	end
 
