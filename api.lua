@@ -1,8 +1,8 @@
-mc_faction_api = {}
+mc_faction.api = {}
 
 local worldpath = minetest.get_worldpath()
 
-function mc_faction_api.getFactions()
+function mc_faction.api.getFactions()
 	count = 0
 
 	local factions = {}
@@ -16,13 +16,13 @@ function mc_faction_api.getFactions()
 	return factions
 end
 
-function mc_faction_api.getFactionMembers(faction)
+function mc_faction.api.getFactionMembers(faction)
 	local conf = parser.Parse(faction .. ".fact")
 
 	return conf["members"]
 end
 
-function mc_faction_api.isInFaction(member, faction)
+function mc_faction.api.isInFaction(member, faction)
 	local conf = parser.Parse(faction .. ".fact")
 
 	for m in pairs(conf["members"]) do
