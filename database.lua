@@ -15,7 +15,7 @@ local db = sql.open(worldpath .. "/mc_faction.sqlite3")
 
 local function sql_exec(q)
 	if db:exec(q) ~= sql.OK then
-		minetest.log("info", "[simple_protection] lSQLite: " .. db:errmsg())
+		minetest.log("info", "[mc_faction] lSQLite: " .. db:errmsg())
 	end
 end
 
