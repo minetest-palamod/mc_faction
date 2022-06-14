@@ -1,9 +1,12 @@
-name: luacheck
+---
+name: Linting
+
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master ]
+    branches: [master]
+
   workflow_dispatch:
 
 jobs:
@@ -11,27 +14,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
-      - name: luacheck
-        uses: nebularg/actions-luacheck@v1.1.0
-        #with:
-          #files: # optional, default is .
-          #path: # optional, default is ${{ github.workspace }}
-          #args: # optional
-          #config: # optional
-          #annotate: # optional, default is none
-      - name: translation
-        run: |
-          echo "::group::French"
-          python3 ${GITHUB_WORKSPACE}/tools/check_translation.py fr
-          echo "::endgroup::"
-          echo "::group::Deutch"
-          python3 ${GITHUB_WORKSPACE}/tools/check_translation.py de
-          echo "::endgroup::"
-          echo "::group::Spanish"
-          python3 ${GITHUB_WORKSPACE}/tools/check_translation.py es
-          echo "::endgroup::"
-          echo "::group::Rusian"
-          python3 ${GITHUB_WORKSPACE}/tools/check_translation.py ru
-          echo "::endgroup::"
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Lint Code Base
+        uses: github/super-linter@v4
+        env:
+          VALIDATE_ALL_CODEBASE: true
+          VALIDATE_JSCPD: false
+          DEFAULT_BRANCH: master
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          LINTER_RULES_PATH: /
